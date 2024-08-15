@@ -6,6 +6,7 @@ const Register = () =>
   
 
     const [csrfToken, setCrsfToken] = useState()
+    const [errorMessage, setErrorMessage] = useState()
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -47,23 +48,26 @@ const Register = () =>
           if (data.error)
           {
             console.log("Registration failed", data.error)
+            setErrorMessage(data.error)
           }
 
           else
           {
-            console.log("User registered succesfully")  
+            console.log("User registered succesfully") 
+            navigate('/login') 
           }
         })
     }
 
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleRegister}>
         <h2>Register</h2>
+        {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
         <input type="text" placeholder="Email" ref={emailRef} value={email} onChange={() => setEmail(emailRef.current.value)} />
         <input type="text" placeholder="Username" ref={usernameRef} value={username} onChange={() => setUsername(usernameRef.current.value)} />
         <input type="text" placeholder="Password" ref={passwordRef} value={password} onChange={() => setPassword(passwordRef.current.value)} />
-        <button onClick = {handleRegister} className='btn'>Register</button>
+        <button type = "submit" className='btn'>Register</button>
     </form>
   )
 }
