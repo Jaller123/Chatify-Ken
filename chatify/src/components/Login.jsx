@@ -21,6 +21,12 @@ const Login = () => {
           .then(data => {console.log(data)
           setCrsfToken(data.csrfToken)
         })}, []);
+
+        const handleLogin = (e) =>
+          {
+            e.preventDefault();
+      
+          }
         
   return (
     <form className="form">
