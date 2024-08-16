@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => 
 {
@@ -14,6 +15,7 @@ const Register = () =>
     const emailRef = useRef()
     const usernameRef = useRef()
     const passwordRef = useRef()
+    const navigate = useNavigate()
     
     useEffect(() => 
       {
