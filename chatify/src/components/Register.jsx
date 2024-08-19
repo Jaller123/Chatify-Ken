@@ -68,6 +68,11 @@ const Register = () =>
         })
     }
 
+    const nextLogin = () =>
+      {
+        navigate('/login') 
+      }
+
 
   return (
     <form className="form" onSubmit={handleRegister}>
@@ -77,7 +82,10 @@ const Register = () =>
         <input type="text" placeholder="Email" ref={emailRef} value={email} onChange={() => setEmail(emailRef.current.value)} />
         <input type="text" placeholder="Username" ref={usernameRef} value={username} onChange={() => setUsername(usernameRef.current.value)} />
         <input type="text" placeholder="Password" ref={passwordRef} value={password} onChange={() => setPassword(passwordRef.current.value)} />
-        <button type = "submit" className='btn'>Register</button>
+        <div className='btn'>
+        <button type="submit">Register</button>
+        <button onClick={nextLogin} type="submit">Already have an account?</button>
+        </div>
     </form>
   )
 }
