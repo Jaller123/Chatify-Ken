@@ -1,5 +1,6 @@
 import React from 'react'
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef,} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
 
     const usernameRef = useRef()
     const passwordRef = useRef()
+    const navigate = useNavigate()
 
     useEffect(() => 
       {
@@ -30,11 +32,13 @@ const Login = () => {
             fetch('https://chatify-api.up.railway.app/auth/token',
               {
                 method: 'POST',
-                headers:  {
+                headers:  
+                {
                   'Content-Type': 'application/json',
                   'X-CSRF-Token': csrfToken,
                 }, 
-                body: JSON.stringify({
+                body: JSON.stringify
+                ({
                   csrfToken: csrfToken,
                   username: username,
                   password: password,
@@ -42,6 +46,7 @@ const Login = () => {
               })
               .then(res => res.json())
               .then(data => {
+                
                 if (data.error)
                 {
                   console.log("Could not find user,", data.error)
@@ -51,6 +56,9 @@ const Login = () => {
                 else
                 {
                   console.log("User Login succesfully") 
+                  localStorage.setItem('userToken', data.token)
+                  console.log(data.token)
+                  navigate('/chat') 
                 }
               })
             
