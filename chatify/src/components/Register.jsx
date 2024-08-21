@@ -6,9 +6,9 @@ const Register = () =>
 {
   
 
-    const [csrfToken, setCrsfToken] = useState()
-    const [errorMessage, setErrorMessage] = useState()
-    const [succesMessage, setSuccesMessage] = useState()
+    const [csrfToken, setCrsfToken] = useState(null)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [succesMessage, setSuccesMessage] = useState("")
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -38,12 +38,12 @@ const Register = () =>
           method: 'POST',
           headers:  {
             'Content-Type': 'application/json',
-            'X-CSRF-Token': csrfToken,
           }, 
           body: JSON.stringify({
             email: email,
             username: username,
             password: password,
+            csrfToken: csrfToken
           })
         })
         .then(res => res.json())
@@ -81,7 +81,7 @@ const Register = () =>
         {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
         <input type="text" placeholder="Email" ref={emailRef} value={email} onChange={() => setEmail(emailRef.current.value)} />
         <input type="text" placeholder="Username" ref={usernameRef} value={username} onChange={() => setUsername(usernameRef.current.value)} />
-        <input type="text" placeholder="Password" ref={passwordRef} value={password} onChange={() => setPassword(passwordRef.current.value)} />
+        <input type="password" placeholder="Password" ref={passwordRef} value={password} onChange={() => setPassword(passwordRef.current.value)} />
         <div className='btn'>
         <button type="submit">Register</button>
         <button onClick={nextLogin} type="submit">Already have an account?</button>
