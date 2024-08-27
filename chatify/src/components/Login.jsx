@@ -58,10 +58,14 @@ const Login = () => {
                 else
                 {
                   console.log("User Login succesfully") 
-                  setSuccesMessage("User Login Succesful, redirecting...")
                   localStorage.setItem('userToken', data.token)
+                  setErrorMessage("")
+                  setSuccesMessage("User Login Succesful, redirecting...")
                   console.log(data.token)
-                  navigate('/chat') 
+                  setTimeout(() => 
+                    {
+                      navigate('/chat') 
+                    }, 1000)
                 }
               })
             
