@@ -5,14 +5,16 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-  const [errorMessage, setErrorMessage] = useState()
+    const [errorMessage, setErrorMessage] = useState()
+    const [succesMessage, setSuccesMessage] = useState("")
     const [csrfToken, setCrsfToken] = useState()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-
+    
     const usernameRef = useRef()
     const passwordRef = useRef()
     const navigate = useNavigate()
+   
 
     useEffect(() => 
       {
@@ -56,6 +58,7 @@ const Login = () => {
                 else
                 {
                   console.log("User Login succesfully") 
+                  setSuccesMessage("User Login Succesful, redirecting...")
                   localStorage.setItem('userToken', data.token)
                   console.log(data.token)
                   navigate('/chat') 
@@ -69,6 +72,7 @@ const Login = () => {
     <form className="form">
         <h2>Login</h2>
         {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
+        {succesMessage && <p style={{color: 'green'}}>{succesMessage}</p>}
         <input type="text" placeholder="Username" ref={usernameRef} value={username} onChange={() => setUsername(usernameRef.current.value)} />
         <input type="text" placeholder="Password" ref={passwordRef} value={password} onChange={() => setPassword(passwordRef.current.value)} />
         <button onClick = {handleLogin} className='btn'>Login</button>

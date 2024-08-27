@@ -6,6 +6,7 @@ const Chat = () => {
   const token = localStorage.getItem('userToken')
   const [messages, setMessages] = useState([])
   const [postMessage, setPostMessage] = useState("")
+  const [decodedJwt, setDecodedJwt] = useState()
   const fakeChat = [{
       text: "Tja tja, hur mår du?",
       avatar: "https://i.pravatar.cc/100?img=14",
@@ -46,6 +47,8 @@ const Chat = () => {
         .then(data => {
           setMessages([...data, ...fakeChat])
           console.log(token)
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          setDecodedJwt(decodedToken)
         })
     }
   }, [token])
@@ -83,6 +86,9 @@ const Chat = () => {
   return (
     <div>
       <h2>Chat Messages</h2>
+      {decodedJwt && (
+        <h3>Welcome, {decodedJwt.user}! </h3>
+      )}
       <ul>
         {messages.map((msg, index) => (
           <>
