@@ -1,12 +1,15 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 
+
 const Chat = () => {
 
   const token = localStorage.getItem('userToken')
   const [messages, setMessages] = useState([])
   const [postMessage, setPostMessage] = useState("")
   const [decodedJwt, setDecodedJwt] = useState()
+
+
 
   const fakeChat = [{
       text: "Tja tja, hur mår du?",
