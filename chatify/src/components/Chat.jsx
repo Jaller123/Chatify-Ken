@@ -7,6 +7,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([])
   const [postMessage, setPostMessage] = useState("")
   const [decodedJwt, setDecodedJwt] = useState()
+
   const fakeChat = [{
       text: "Tja tja, hur mår du?",
       avatar: "https://i.pravatar.cc/100?img=14",
@@ -47,8 +48,8 @@ const Chat = () => {
         .then(data => {
           setMessages([...data, ...fakeChat])
           console.log(token)
-          const decodedToken = JSON.parse(atob(token.split('.')[1]));
-          setDecodedJwt(decodedToken)
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          setDecodedJwt(payload)
         })
     }
   }, [token])
@@ -82,6 +83,27 @@ const Chat = () => {
   }
 
 
+  const handleDelete = (msgID) =>
+    {
+      fetch(`https://chatify-api.up.railway.app/messages/${msgID}`,
+         {
+           method: 'DELETE',
+           headers:
+           {
+             'Authorization': `Bearer ${token}`,
+             'Content-Type': 'application/json',
+           },
+         })
+   
+         .then(res => res.json())
+         .then(data => {
+           setMessages(messages.filter((msg) => msg.id !== msgID));
+           // Filter function removes message if msg.id matches msgID
+         })
+     }
+
+
+
 
   return (
     <div>
@@ -102,6 +124,7 @@ const Chat = () => {
               <li style={{ color: 'red' }} key={index}>
                 <div>
                   {msg.text}
+                  <button onClick={() => handleDelete(msg.id)} className='btn'>Delete</button>
                 </div>
               </li>
             )}
