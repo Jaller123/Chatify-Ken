@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import './CSS/Chat.css'
 
 
 const Chat = () => {
@@ -118,13 +119,13 @@ const Chat = () => {
         {messages.map((msg, index) => (
           <>
             {msg.isBot ? (
-              <li key={index}>
+              <li  className="bot-chat" key={index}>
                 <div>
                   {msg.text}
                 </div>
               </li>
             ) : (
-              <li style={{ color: 'red' }} key={index}>
+              <li className="user-chat" key={index}>
                 <div>
                   {msg.text}
                   <button onClick={() => handleDelete(msg.id)} className='btn'>Delete</button>
@@ -134,8 +135,10 @@ const Chat = () => {
           </>
         ))}
       </ul>
-      <input type="text" placeholder="Chat here" onChange={(e) => setPostMessage(e.target.value)} />
-      <button onClick={handleChat} className='btn'>Send</button>
+      <div className='input-chat'>
+        <input type="text" placeholder="Chat here" onChange={(e) => setPostMessage(e.target.value)} />
+        <button onClick={handleChat} className='btn'>Send</button>
+      </div>
     </div>
   )
 }

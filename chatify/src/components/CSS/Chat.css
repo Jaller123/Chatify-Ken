@@ -1,0 +1,20 @@
+.bot-chat
+{
+  color: red;
+  position: relative;
+  left: 70%;
+}
+
+.user-chat
+{
+  position: relative;
+  left: 10%
+}
+
+.input-chat
+{
+    margin: 30px;
+    position: relative;
+    left: 35%;
+}
+
