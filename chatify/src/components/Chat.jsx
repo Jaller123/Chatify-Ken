@@ -1,4 +1,5 @@
 import React from 'react'
+import SideNav from './SideNav'
 import { useEffect, useState } from 'react'
 import './CSS/Chat.css'
 
@@ -110,6 +111,8 @@ const Chat = () => {
 
 
   return (
+    <>
+    <SideNav />
     <div>
       <h2>Chat Messages</h2>
       {decodedJwt && (
@@ -140,6 +143,7 @@ const Chat = () => {
         <button onClick={handleChat} className='btn'>Send</button>
       </div>
     </div>
+    </>
   )
 }
 
