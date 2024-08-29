@@ -3,6 +3,7 @@ import Login from "./components/Login"
 import Chat from "./components/Chat"
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
  
@@ -13,7 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Register />}/>
           <Route path="/login" element={<Login />}/>
-          <Route path="/chat" element={<Chat />}/>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/chat" element={<Chat />}/>
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
