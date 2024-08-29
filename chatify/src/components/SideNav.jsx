@@ -1,12 +1,15 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const SideNav = () => {
+
+  let navigate = useNavigate()
 
   const logoutFunction = () =>
   {
     localStorage.removeItem('userToken')
-    localStorage.clear('userToken')
-    
+
+    navigate("/login")
   }
 
 
