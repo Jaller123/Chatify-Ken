@@ -2,12 +2,13 @@ import React from 'react'
 import { useEffect, useState, useRef,} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CSS/Login.css'
+import './CSS/Background.css'
 
 
 const Login = () => {
 
     const [errorMessage, setErrorMessage] = useState()
-    const [succesMessage, setSuccesMessage] = useState("")
+    const [successMessage, setSuccesMessage] = useState("")
     const [csrfToken, setCrsfToken] = useState()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -74,15 +75,43 @@ const Login = () => {
           }
         
   return (
-    <form className="form">
-        <h2>Login</h2>
-        {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-        {succesMessage && <p style={{color: 'green'}}>{succesMessage}</p>}
-        <input type="text" placeholder="Username" ref={usernameRef} value={username} onChange={() => setUsername(usernameRef.current.value)} />
-        <input type="text" placeholder="Password" ref={passwordRef} value={password} onChange={() => setPassword(passwordRef.current.value)} />
-        <button onClick = {handleLogin} className='btn'>Login</button>
+    <div className="login-box">
+    <h2>Login</h2>
+    <form onSubmit={handleLogin}>
+      <div className="user-box">
+        <input
+          type="text"
+          name="username"
+          ref={usernameRef}
+          value={username}
+          onChange={() => setUsername(usernameRef.current.value)}
+          required
+        />
+        <label>Username</label>
+      </div>
+      <div className="user-box">
+        <input
+          type="password"
+          name="password"
+          ref={passwordRef}
+          value={password}
+          onChange={() => setPassword(passwordRef.current.value)}
+          required
+        />
+        <label>Password</label>
+      </div>
+      <a href="#" onClick={handleLogin}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </a>
+      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
     </form>
-  )
-}
+  </div>
+);
+};
 
 export default Login
