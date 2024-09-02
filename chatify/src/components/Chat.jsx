@@ -10,7 +10,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([])
   const [postMessage, setPostMessage] = useState("")
   const [decodedJwt, setDecodedJwt] = useState()
-
+  
 
 
   const fakeChat = [{

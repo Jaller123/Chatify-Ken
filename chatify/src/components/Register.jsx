@@ -13,6 +13,7 @@ const Register = () =>
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [avatarUrl, setAvatarUrl] = useState();
 
     const emailRef = useRef()
     const usernameRef = useRef()
@@ -67,7 +68,16 @@ const Register = () =>
             
           }
         })
+      
     }
+
+    const getRandomAvatar = () => {
+      const randomId = Math.floor(Math.random() * 70) + 1;
+      return `https://i.pravatar.cc/200?img=${randomId}`
+    };
+  const handleAvatar = () => {
+      setAvatarUrl(getRandomAvatar());
+    };
 
     const nextLogin = () =>
       {
@@ -118,6 +128,13 @@ const Register = () =>
       </div>
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      <div className='avat'>
+          <h2>Choose an Avatar</h2>
+          <img src={avatarUrl} />
+          <button type="button" className='r-btn' onClick={handleAvatar} >
+            Choose a picture
+          </button>
+        </div>
     </form>
   </div>
 );
