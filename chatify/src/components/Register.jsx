@@ -85,59 +85,70 @@ const Register = () =>
       }
 
 
-  return (
-    <div className="login-box">
-    <h2>Register</h2>
-    <form onSubmit={handleRegister}>
-      <div className="user-box">
-        <input
-          type="text"
-          name="email"
-          ref={emailRef}
-          value={email}
-          onChange={() => setEmail(emailRef.current.value)}
-          required
-        />
-        <label>Email</label>
-      </div>
-      <div className="user-box">
-        <input
-          type="text"
-          name="username"
-          ref={usernameRef}
-          value={username}
-          onChange={() => setUsername(usernameRef.current.value)}
-          required
-        />
-        <label>Username</label>
-      </div>
-      <div className="user-box">
-        <input
-          type="password"
-          name="password"
-          ref={passwordRef}
-          value={password}
-          onChange={() => setPassword(passwordRef.current.value)}
-          required
-        />
-        <label>Password</label>
-      </div>
-      <div className="btn-box">
-        <button type="submit" className="btn">Register</button>
-        <button onClick={nextLogin} type="button" className="btn">Already have an account?</button>
-      </div>
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      <div className='avat'>
-          <h2>Choose an Avatar</h2>
-          <img src={avatarUrl} />
-          <button type="button" className='r-btn' onClick={handleAvatar} >
-            Choose a picture
-          </button>
+      return (
+        <div className="login-box">
+          <form onSubmit={handleRegister}>
+            <div className="user-box">
+              <input
+                type="text"
+                name="email"
+                ref={emailRef}
+                value={email}
+                onChange={() => setEmail(emailRef.current.value)}
+                required
+              />
+              <label>Email</label>
+            </div>
+            <div className="user-box">
+              <input
+                type="text"
+                name="username"
+                ref={usernameRef}
+                value={username}
+                onChange={() => setUsername(usernameRef.current.value)}
+                required
+              />
+              <label>Username</label>
+            </div>
+            <div className="user-box">
+              <input
+                type="password"
+                name="password"
+                ref={passwordRef}
+                value={password}
+                onChange={() => setPassword(passwordRef.current.value)}
+                required
+              />
+              <label>Password</label>
+            </div>
+            <div className="btn-box">
+              <button type="submit" className="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Register
+              </button>
+              <button onClick={nextLogin} type="button" className="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Already have an account?
+              </button>
+            </div>
+            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            <div className='avat'>
+              <h2>Choose an Avatar</h2>
+              <img src={avatarUrl} />
+              <button type="button" className='r-btn' onClick={handleAvatar}>
+                Choose a picture
+              </button>
+            </div>
+          </form>
         </div>
-    </form>
-  </div>
-);
-};
+      );
+    };
 
 export default Register
