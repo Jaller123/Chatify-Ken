@@ -11,6 +11,7 @@ const Chat = () => {
   const [postMessage, setPostMessage] = useState("")
   const [decodedJwt, setDecodedJwt] = useState()
   
+  
 
 
   const fakeChat = [{
@@ -54,7 +55,8 @@ const Chat = () => {
           setMessages([...data, ...fakeChat])
           console.log(token)
           const payload = JSON.parse(atob(token.split('.')[1]));
-          setDecodedJwt(payload)
+          console.log(payload)
+          setDecodedJwt(payload) // Token 
         })
     }
   }, [token])
@@ -112,39 +114,45 @@ const Chat = () => {
 
   return (
     <>
-    <SideNav />
-    <div>
-      <h2>Chat Messages</h2>
-      {decodedJwt && (
-        <h3>Welcome, {decodedJwt.user}! </h3>
-      )}
-      <ul>
-        {messages.map((msg, index) => (
-          <>
-            {msg.isBot ? (
-              <li  className="bot-chat" key={index}>
-                <div>
-                  {msg.text}
-                </div>
-              </li>
-            ) : (
-              <li className="user-chat" key={index}>
-                <div>
-                  {msg.text}
-                  <button onClick={() => handleDelete(msg.id)} className='btn'>Delete</button>
-                </div>
-              </li>
-            )}
-          </>
-        ))}
-      </ul>
-      <div className='input-chat'>
-        <input type="text" placeholder="Chat here" onChange={(e) => setPostMessage(e.target.value)} />
-        <button onClick={handleChat} className='btn'>Send</button>
+      <SideNav />
+      <div className="chat-container">
+        <h2>Chat Messages</h2>
+        {decodedJwt && (
+          <h3>Welcome, {decodedJwt.user}! <img src={decodedJwt.avatar} alt="avatar" /></h3>
+        )}
+        <ul>
+          {messages.map((msg, index) => (
+            <React.Fragment key={index}>
+              {msg.isBot ? (
+                <li className="bot-chat">
+                  <div>
+                    {msg.text}
+                  </div>
+                </li>
+              ) : (
+                <li className="user-chat">
+                  <div>
+                    {msg.text}
+                    <button onClick={() => handleDelete(msg.id)} className="btn">Delete</button>
+                  </div>
+                </li>
+              )}
+            </React.Fragment>
+          ))}
+        </ul>
+        <div className="input-chat">
+          <input
+            type="text"
+            placeholder="Chat here"
+            value={postMessage}
+            onChange={(e) => setPostMessage(e.target.value)}
+          />
+          <button onClick={handleChat} className="btn">Send</button>
+        </div>
       </div>
-    </div>
     </>
-  )
-}
+  );
+};
+
 
 export default Chat

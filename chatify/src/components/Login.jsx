@@ -76,7 +76,6 @@ const Login = () => {
         
   return (
     <div className="login-box">
-    <h2>Login</h2>
     <form onSubmit={handleLogin}>
       <div className="user-box">
         <input
@@ -105,7 +104,7 @@ const Login = () => {
         <span></span>
         <span></span>
         <span></span>
-        Submit
+        Login
       </a>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
