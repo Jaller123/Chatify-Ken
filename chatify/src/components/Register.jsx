@@ -45,6 +45,7 @@ const Register = () =>
             email: email,
             username: username,
             password: password,
+            avatar: avatarUrl,
             csrfToken: csrfToken
           })
         })
